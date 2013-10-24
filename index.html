@@ -63,19 +63,21 @@
 					</section>
 					<section>
 						<h2>What is Usability?</h2>
+						<aside class="notes">
+							<p>How easy something is to use and learn</p>
+						</aside>
 					</section>
 					<section>
 						<h2>What is UX?</h2>
-					</section>
-					<section>
-						<h2>UX is important because...</h2>
+						<aside class="notes">
+							<p>UX goes a level above usability — it's about how enjoyable a product is. It's about creating a pleasurable experience for our users. It's about making our users' lives easier. Usability should be the baseline, not the standard.</p>
+						</aside>
 					</section>
 					<section>
 						<h2>UX in wp-admin</h2>
 						<ol>
-							<li>Don't make your users have to hunt around for things</li>
-							<li>Make them feel secure in knowing where things are</li>
-							<li>Provide a familiar environment for them to learn your new feature</li>
+							<li>Provide a familiar environment for your users to learn your new feature.</li>
+							<li>Don't make your users have to hunt around for things. Make them feel secure in knowing where things are.</li>
 						</ol>
 					</section>
 				</section>
@@ -83,14 +85,16 @@
 				<!-- Settings API: UX -->
 				<section data-state="magenta">
 					<section>
-						<h2>Overarching principles</h2>
-						<h3>New features, such as plugins and themes, should always be seamlessly integrated into the WordPress admin interface.</h3>
+						<h2>Be one with WordPress</h2>
+						<aside class="notes">
+							<p>New features, such as plugins and themes, should always be seamlessly integrated into the WordPress admin interface.</p>
+						</aside>
 					</section>
 					<section>
-						<h3>When at all possible, you should be using the Settings API to create new admin pages for your plugins or themes.</h3>
-					</section>
-					<section>
-						<h4>Best practices</h4>
+						<h2>Use the Settings API</h2>
+						<aside class="notes">
+							<p>When at all possible, you should be using the Settings API to create new admin pages for your plugins or themes.</p>
+						</aside>
 					</section>
 					<section>
 						<h3>Place your theme or plugin settings/configurations/actions in a logical location in the admin menu.</h3>
@@ -331,6 +335,21 @@ function wcbos_validate( $input ) {
    return $output;
 }						</code></pre>
 						<p class="fragment"><code><a class="ref" href='http://queryposts.com/function/sanitize_text_field/'>sanitize_text_field()</a></code></p>
+					</section>
+				</section>
+				
+				<!-- Theme Options: UX -->
+				<section data-state="purple">
+					<section>
+						<h2>Theme Pages Best Practices</h2>
+					</section>
+					<section>
+						<h2>You probably don't need a "themes options" page.</h2>
+						<aside class="notes">
+							<p>Don’t take items that should be in the Appearance menu (like custom headers, background, etc.) and put them in your screen options page. They should stay as options in the Appearance menu. Also add them to the customizer!</p>
+							<p>If you *need* one, add control settings that are unique to your theme. There’s nothing worse than having options presented in two separate places and not knowing which one overwrites the other or which one is currently active (like page templates / sidebar locations).</p>
+							<p>Have something like a logo uploader? Give it its own page, "Custom Logo", instead of "theme options". It's more intuitive, and if a user sees that, they know what it means.</p>
+						</aside>
 					</section>
 				</section>
 
