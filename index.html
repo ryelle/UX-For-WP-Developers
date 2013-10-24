@@ -298,9 +298,149 @@ function wcbos_validate( $input ) {
 					<section>
 						<h2>Custom Content</h2>
 						<ol>
-							<li>Post Types</li>
-							<li>Taxonomies</li>
+							<li>Create a post type with the correct defaults</li>
+							<li>Create a custom taxonomy</li>
+							<li>Add any extra fields to the post type</li>
+							<li>Update the post type icon</li>
+							<li>Update any strings with relevant text</li>
 						</ol>
+					</section>
+					<section>
+						<h2>Create a post type with the correct defaults</h2>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+add_action( 'init', 'wcbos_create_post_type' );
+
+function wcbos_create_post_type() {
+	register_post_type( 'wcbos-people', array(
+		'labels'      => array(
+			'name'          => 'People',
+			'singular_name' => 'Person',
+			'add_new'       => 'Add Person',
+			'add_new_item'  => 'Add New Person',
+			'edit_item'     => 'Edit Person',
+			'new_item'      => 'New Person',
+			'search_items'  => 'Search People',
+			'not_found'     => 'No people found',
+			'not_found_in_trash' => 'No people found in trash'
+		),
+		'public'      => true,
+		'supports'    => array( 'title', 'editor', 'thumbnail' ),
+		'rewrite'     => array( 'slug' => 'person' ),
+		'has_archive' => 'people',
+	) );
+	// ... continued
+						</code></pre>
+						<p>Title, editor, featured image</p>
+					</section>
+					<section>
+						<h2>Create a Custom Taxonomy</h2>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+	// ... inside wcbos_create_post_type()
+	register_taxonomy( 'wcbos-team', 'wcbos-people', array(
+		'labels' => array(
+			'name' => 'Teams',
+			'singular_name' => 'Team',
+			'all_items' => 'All Teams',
+			'edit_item' => 'Edit Team',
+			'view_item' => 'View Team',
+			'update_item' => 'Update Team',
+			'add_new_item' => 'Add New Team',
+			'new_item_name' => 'New Team Name',
+			'search_items' => 'Search Teams',
+			'popular_items' => 'Popular Teams',
+			'parent_item' => 'Parent Team',
+			'parent_item_colon' => 'Parent Team:',
+		),
+		'hierarchical' => true,
+		'show_admin_column' => true,
+		'rewrite' => array( 'slug' => 'team' ),
+	) );
+}						</code></pre>
+					</section>
+					<section>
+						<h2>Extra Fields on a Post Type (setup)</h2>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+	// inside the register_post_type args in wcbos_create_post_type()
+		'has_archive' => 'people',
+		'register_meta_box_cb'=> 'wcbos_add_metaboxes',
+	) );
+}
+
+function wcbos_add_metaboxes() {
+	// New metabox for person information: twitter, website, etc
+	add_meta_box( 
+		'wcbos-people-info', // ID
+		"Information", // Title
+		'wcbos_people_info_box', // Display callback
+		'wcbos-people', // Post type
+		'normal', // Context, 'normal', 'advanced', or 'side'
+		'default' // Priority, 'high', 'core', 'default' or 'low'
+	);
+	
+	// ... continued later ...
+}						</code></pre>
+					</section>
+					<section>
+						<h2>Extra Fields on a Post Type (display)</h2>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+function wcbos_people_info_box() {
+	echo "metabox";
+}						</code></pre>
+					</section>
+					<section>
+						<h2>Extra Fields on a Post Type (saving)</h2>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+???
+						</code></pre>
+					</section>
+					<section>
+						<h2>Renaming the Featured Image</h2>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+// inside wcbos_add_metaboxes()
+	remove_meta_box( 
+		'postimagediv', // ID
+		'wcbos-people', // Post type
+		'side' // Context
+	);
+	add_meta_box( 
+		'postimagediv', 
+		__( 'Photo' ), 
+		'post_thumbnail_meta_box', 
+		'wcbos-people', 
+		'side' 
+	);
+}						</code></pre>
+					</section>
+					<section>
+						<h2>Better Taxonomy UI</h2>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+Link to select2, chosen, but really just show a different interface.
+						</code></pre>
+					</section>
+					<section>
+						<h2>Update the Post Type Icon (non-MP6)</h2>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+						</code></pre>
+					</section>
+					<section>
+						<h2>Update the Post Type Icon (MP6)</h2>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+add_action( 'admin_head', 'wcbos_custom_icons' );
+
+function custom_icons() { ?&gt;
+	&lt;style type="text/css" media="screen"&gt;
+	.mp6 #adminmenu #menu-posts-wcbos-people .wp-menu-image:before {
+		content: '\f307';
+	}
+	&lt;/style&gt;
+&lt;?php }
+						</code></pre>
+						<p class="fragment"><a class="ref" href='https://github.com/tillkruess/MP6-Icon-Examples/'>More examples, using custom font &amp; SVG</a></p>
+					</section>
+					<section>
+						<h2>Update Strings With Relevant Text</h2>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+						</code></pre>
 					</section>
 				</section>
 
