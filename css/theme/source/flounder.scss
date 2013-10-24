@@ -124,6 +124,10 @@ body {
 		background-color: darken( $chat-base, 10% );
 		.reveal { color: $chat; }
 	}
+	
+	pre code {
+		background: #222;
+	}
 }
 
 .reveal {
