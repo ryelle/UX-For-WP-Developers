@@ -606,6 +606,13 @@ function custom_icons() { ?&gt;
 				transition: 'linear', // default/cube/page/concave/zoom/linear/fade/none
 				backgroundTransition: 'slide',
 
+//				multiplex: {
+//			        // Example values. To generate your own, see the socket.io server instructions.
+//			        secret: '13826458942424999220',
+//			        id: '53db137dfa1a19cc', // Obtained from socket.io server
+//			        url: 'revealjs.jit.su:80' // Location of socket.io server
+//			    },
+
 				// Optional libraries used to extend on reveal.js
 				dependencies: [
 					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
@@ -614,6 +621,10 @@ function custom_icons() { ?&gt;
 					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
 					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
 					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					
+//					{ src: 'socket.io/socket.io.js', async: true },
+//					{ src: 'plugin/multiplex/master.js', async: true },
+//					{ src: 'plugin/notes-server/client.js', async: true }
 				]
 			});
 
