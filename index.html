@@ -28,6 +28,12 @@
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
+		<style>
+		p > code {
+			font-size: .9em !important;
+		}
+		</style>
+
 	</head>
 
 	<body>
@@ -50,19 +56,23 @@
 					</section>
 				</section>
 
+				<!-- Settings API -->
 				<section data-state="magenta">
 					<section>
 						<h2>Settings API</h2>
-						<ul>
-							<li>Creating a new page</li>
-							<li>Creating a section on a page</li>
-							<li>Creating individual fields</li>
-							<li>Saving/validating these fields</li>
-						</ul>
+						<ol>
+							<li>Create a new page</li>
+							<li>Tell WordPress about your settings</li>
+							<li>Display the (empty) page</li>
+							<li>Create a section on the page</li>
+							<li>Create individual fields</li>
+							<!--<li>Show full wcbos_register_fields function</li>-->
+							<li>Validate &amp; save these fields</li>
+						</ol>
 					</section>
 
 					<section>
-						<h2>Creating a new page</h2>
+						<h2>Create a new page</h2>
 						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
 add_action( 'admin_menu', 'wcbos_settings_page' );
 
@@ -74,20 +84,11 @@ public function wcbos_settings_page() {
 		'wcbos-2013', // Slug
 		'wcbos_settings_page_render' // Display callback
 	);
-}
-
-public function wcbos_settings_page_render() {
-	?&gt;
-	&lt;div class="wrap"&gt;
-		&lt;h2&gt;WordCamp Boston Options&lt;/h2&gt;
-		<!-- Settings -->
-	&lt;/div&gt;
-	&lt;?php
-}
-						</code></pre>
+}						</code></pre>
+						<p class="fragment"><code><a class="ref" href='http://queryposts.com/function/add_options_page/'>add_options_page()</a></code></p>
 					</section>
 					<section>
-						<h2>Creating a section on a page</h2>
+						<h2>Tell WordPress about your settings</h2>
 						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
 add_filter( 'admin_init', 'wcbos_register_fields' );
 
@@ -98,82 +99,208 @@ function wcbos_register_fields() {
 		'wcbos_validate' // Validation callback
 	);
 	
+	// ... continued later ...
+}						</code></pre>
+						<p class="fragment"><code><a class="ref" href='http://queryposts.com/function/register_setting/'>register_setting()</a></code></p>
+					</section>
+					<section>
+						<h2>Display the (empty) page</h2>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+public function wcbos_settings_page_render() {
+	?&gt;
+	&lt;div class="wrap"&gt;
+		&lt;h2&gt;WordCamp Boston Options&lt;/h2&gt;
+		&lt;form action="options.php" method="post"&gt;
+			&lt;?php settings_fields( 'wcbos_options' ); ?&gt;
+			&lt;?php do_settings_sections( 'wcbos_options' ); ?&gt;
+			&lt;?php submit_button(); ?&gt;
+		&lt;/form&gt;
+	&lt;/div&gt;
+	&lt;?php
+}						</code></pre>
+						<p class="fragment"><code><a class="ref" href='http://queryposts.com/function/settings_fields/'>settings_fields()</a></code> &bull; <code><a class="ref" href='http://queryposts.com/function/do_settings_sections/'>do_settings_sections()</a></code> &bull; <code><a class="ref" href='http://queryposts.com/function/submit_button/'>submit_button()</a></code></p>
+					</section>
+					<section>
+						<h2>Create a section on the page (setup)</h2>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+// ... inside wcbos_register_fields()
 	add_settings_section( 
 		'wcbos_first_section', // ID
-		'Meetup API Settings', // Title
+		__( "Meetup API Settings" ), // Title
 		'wcbos_settings_first_section', // Display callback
 		'wcbos_options' // Page
 	);
-	
-	// ... more settings ...
+// ... more settings ...</code></pre>
+						<p class="fragment"><code><a class="ref" href='http://queryposts.com/function/add_settings_section/'>add_settings_section()</a></code></p>
+					</section>
+					<section>
+						<h2>Create a section on the page (display)</h2>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+function wcbos_settings_first_section() {
+	_e( "This is a description of the first section." );
 }
 						</code></pre>
+						<p class="fragment">You can also pass false to <code>add_settings_section</code><br /> for the callback, to only display the section title.</p>
 					</section>
-					
 					<section>
-						<h2>Creating individual fields</h2>
+						<h2>Creating individual fields (setup)</h2>
 						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
 // ... inside wcbos_register_fields()
 	add_settings_field(
 		'wcbos_text_one', // ID
-		"First Name", // Title
+		__( "First Name" ), // Title
 		'wcbos_settings_text_field', // Display callback
 		'wcbos_options', // Page
 		'wcbos_first_section', // Section
 		array( 'label_for' => 'wcbos_text_one' ) // Args
 	);
-// ... more settings ...
-						</code></pre>
+// ... more settings ...</code></pre>
+						<p class="fragment"><code><a class="ref" href='http://queryposts.com/function/add_settings_field/'>add_settings_field()</a></code></p>
 					</section>
 					<section>
-						<h2>Creating a dropdown field</h2>
+						<h2>Creating individual fields (display)</h2>
 						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
-function settings_dropdown( $args ) {
+function wcbos_settings_text_field( $args ) {
 	if ( ! isset( $args['label_for'] ) )
 		return;
 
 	$id = $args['label_for'];
 	$values = get_option( 'wcbos_option' );
-	$options = $this->get_options();
-	echo '<select name="wcbos_option['.$id.']">';
-	foreach ( $options as $value => $view ) {
-		printf( '<option value="%s" %s>%s</option>', $value, selected( $value, $values[$id], false ), $view );
-	}
-	echo '</select>';
+	printf( 
+		'&lt;input type="text" name="%1$s" id="%1$s" value="%2$s" /&gt;', 
+		"wcbos_option[$id]", 
+		esc_attr( $values[$id] )
+	);
+}						</code></pre>
+						<p class="fragment">We're using label_for as an ID, so we can create<br /> a "generic" text input function.</p>
+					</section>					
+					<section>
+						<h2>Creating a dropdown field (setup)</h2>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+// ... inside wcbos_register_fields()
+	add_settings_field(
+		'wcbos_dropdown', // ID
+		__( "Options" ), // Title
+		'wcbos_settings_dropdown', // Display callback
+		'wcbos_options', // Page
+		'wcbos_first_section', // Section
+		array( 'label_for' => 'wcbos_dropdown' ) // Args
+	);
+// ... more settings ...
 }
 
-function get_options() {
+function wcbos_example_options() {
 	$options = array(
-		'a' => 'Option A',
-		'b' => 'Option B',
-		'c' => 'Option C',
+		'a' => __( "Option A" ),
+		'b' => __( "Option B" ),
+		'c' => __( "Option C" ),
 	);
 	return apply_filters( 'wcbos_example_options', $options );
-}
-						</code></pre>
+}						</code></pre>
+					</section>
+					<section>
+						<h2>Creating a dropdown field (display)</h2>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+function wcbos_settings_dropdown( $args ) {
+	if ( ! isset( $args['label_for'] ) )
+		return;
+
+	$id = $args['label_for'];
+	$values = get_option( 'wcbos_option' );
+	$options = wcbos_example_options(); // Filterable list of choices
+	echo '&lt;select name="wcbos_option['.$id.']"&gt;';
+	foreach ( $options as $key => $view ) {
+		printf( 
+			'&lt;option value="%s" %s&gt;%s&lt;/option&gt;', 
+			$key, 
+			selected( $key, $values[$id], false ), 
+			$view 
+		);
+	}
+	echo '&lt;/select&gt;';
+}						</code></pre>
+						<p class="fragment"><code><a class="ref" href='http://queryposts.com/function/selected/'>selected()</a></code></p>
+					</section>
+					<section>
+						<h2>All of <code>register</code></h2>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+function wcbos_register_fields() {
+	register_setting( 
+		'wcbos_options', // Option group (used to display fields)
+		'wcbos_option', // Option name
+		'wcbos_validate' // Validation callback
+	);
+
+	add_settings_section( 
+		'wcbos_first_section', // ID
+		__( "Meetup API Settings" ), // Title
+		'wcbos_settings_first_section', // Display callback
+		'wcbos_options' // Page
+	);
+
+	add_settings_field(
+		'wcbos_text_one', // ID
+		__( "First Name" ), // Title
+		'wcbos_settings_text_field', // Display callback
+		'wcbos_options', // Page
+		'wcbos_first_section', // Section
+		array( 'label_for' => 'wcbos_text_one' ) // Args
+	);
+
+	add_settings_field(
+		'wcbos_dropdown', // ID
+		__( "Options" ), // Title
+		'wcbos_settings_dropdown', // Display callback
+		'wcbos_options', // Page
+		'wcbos_first_section', // Section
+		array( 'label_for' => 'wcbos_dropdown' ) // Args
+	);
+}						</code></pre>
 					</section>
 					<section>
 						<h2>Saving/validating these fields</h2>
-						<p>In <code>register_setting</code> we defined a validation callback <code>wcbos_validate</code>.</p>
-						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
-public function wcbos_validate($input) {
-	$output = array();
+						<p>We've created a text field and a dropdown, now we should<br /> validate/sanitize before saving.</p>
+						<p class="fragment">In <code>register_setting</code> we defined a validation callback <code>wcbos_validate</code>.</p>
+						<pre class="fragment"><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+function wcbos_validate( $input ) {
+   $output = array();
 
-	// If set and valid
-	if ( isset( $input['wcbos_text_one'] ) ){
-		$output['wcbos_text_one'] = sanitize_text_field( $input['wcbos_text_one'] );
-	}
-	if ( isset( $input['wcbos_text_two'] ) ){
-		$output['wcbos_text_two'] = sanitize_text_field( $input['wcbos_text_two'] );
-	}
-	$options = wcbos_dropdown_options();
-	if ( isset( $input['wcbos_dropdown'] ) && in_array( $input['wcbos_dropdown'], array_keys( $options ) ) ){
-		$output['wcbos_dropdown'] = $input['wcbos_dropdown'];
-	}
+   // If set and valid
+   if ( isset( $input['wcbos_text_one'] ) ){
+      $output['wcbos_text_one'] = sanitize_text_field( $input['wcbos_text_one'] );
+   }
 
-    return $output;
-}
-						</code></pre>
+   $options = wcbos_example_options();
+   if ( isset( $input['wcbos_dropdown'] ) ){
+      if ( in_array( $input['wcbos_dropdown'], array_keys( $options ) ) ) {
+         $output['wcbos_dropdown'] = $input['wcbos_dropdown'];
+      }
+   }
+
+   return $output;
+}						</code></pre>
+						<p class="fragment"><code><a class="ref" href='http://queryposts.com/function/sanitize_text_field/'>sanitize_text_field()</a></code></p>
+					</section>
+				</section>
+
+				<!-- Theme Options -->
+				<section data-state="purple">
+					<section>
+						<h2>Theme Options</h2>
+						<ol>
+							<li>Stuff</li>
+						</ol>
+					</section>
+				</section>
+				
+				<!-- Theme Options -->
+				<section data-state="cyan">
+					<section>
+						<h2>Custom Content</h2>
+						<ol>
+							<li>Post Types</li>
+							<li>Taxonomies</li>
+						</ol>
 					</section>
 				</section>
 

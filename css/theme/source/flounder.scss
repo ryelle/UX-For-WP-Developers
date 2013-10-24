@@ -78,51 +78,61 @@ body {
 	.grass & {
 		background-color: darken( $aside-base, 10% );
 		.reveal { color: $aside; }
+		.reveal a.ref { color: $aside-base; }
 	}
 
 	.green & {
 		background-color: darken( $image-base, 10% );
 		.reveal { color: $image; }
+		.reveal a.ref { color: $image-base; }
 	}
 
 	.seaweed & {
 		background-color: darken( $standard-base, 10% );
 		.reveal { color: $standard; }
+		.reveal a.ref { color: $standard-base; }
 	}
 
 	.cyan & {
 		background-color: darken( $quote-base, 10% );
 		.reveal { color: $quote; }
+		.reveal a.ref { color: $quote-base; }
 	}
 
 	.blue & {
 		background-color: darken( $gallery-base, 10% );
 		.reveal { color: $gallery; }
+		.reveal a.ref { color: $gallery-base; }
 	}
 
 	.purple & {
 		background-color: darken( $link-base, 10% );
 		.reveal { color: $link; }
+		.reveal a.ref { color: $link-base; }
 	}
 
 	.magenta & {
 		background-color: darken( $status-base, 10% );
 		.reveal { color: $status; }
+		.reveal a.ref { color: $status-base; }
 	}
 
 	.orangered & {
 		background-color: darken( $video-base, 10% );
 		.reveal { color: $video; }
+		.reveal a.ref { color: $video-base; }
 	}
 
 	.orange & {
 		background-color: darken( $audio-base, 10% );
 		.reveal { color: $audio; }
+		.reveal a.ref { color: $audio-base; }
 	}
 
 	.gold & {
 		background-color: darken( $chat-base, 10% );
 		.reveal { color: $chat; }
+		.reveal a.ref { color: $chat-base; }
 	}
 	
 	pre code {
@@ -179,15 +189,20 @@ body {
  * LINKS
  *********************************************/
 
+.reveal a.ref {
+	background-color: $linkColor;
+	padding:3px;
+}
+
 .reveal a:not(.image) {
 	color: $linkColor;
 	text-decoration: none;
 
-	-webkit-transition: color .15s ease;
-	   -moz-transition: color .15s ease;
-	    -ms-transition: color .15s ease;
-	     -o-transition: color .15s ease;
-	        transition: color .15s ease;
+	-webkit-transition: all .15s ease;
+	   -moz-transition: all .15s ease;
+	    -ms-transition: all .15s ease;
+	     -o-transition: all .15s ease;
+	        transition: all .15s ease;
 }
 	.reveal a:not(.image):hover {
 		color: $linkColorHover;

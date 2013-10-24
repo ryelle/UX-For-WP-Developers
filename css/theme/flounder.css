@@ -138,42 +138,62 @@ body {
     background-color: #537c1a; }
     .grass body .reveal {
       color: #eefadc; }
+    .grass body .reveal a.ref {
+      color: #6fa623; }
   .green body {
     background-color: #1e8449; }
     .green body .reveal {
       color: #c7f0d8; }
+    .green body .reveal a.ref {
+      color: #27ae60; }
   .seaweed body {
     background-color: #107360; }
     .seaweed body .reveal {
       color: #c7eee6; }
+    .seaweed body .reveal a.ref {
+      color: #16a085; }
   .cyan body {
     background-color: #18797a; }
     .cyan body .reveal {
       color: #dcfafa; }
+    .cyan body .reveal a.ref {
+      color: #21a3a4; }
   .blue body {
     background-color: #20638f; }
     .blue body .reveal {
       color: #c7e0f0; }
+    .blue body .reveal a.ref {
+      color: #2980b9; }
   .purple body {
     background-color: #703688; }
     .purple body .reveal {
       color: #f2dcfa; }
+    .purple body .reveal a.ref {
+      color: #8e44ad; }
   .magenta body {
     background-color: #85244b; }
     .magenta body .reveal {
       color: #fadcec; }
+    .magenta body .reveal a.ref {
+      color: #ad2f62; }
   .orangered body {
     background-color: #962d22; }
     .orangered body .reveal {
       color: #fadfdc; }
+    .orangered body .reveal a.ref {
+      color: #c0392b; }
   .orange body {
     background-color: #a04000; }
     .orange body .reveal {
       color: #faeadc; }
+    .orange body .reveal a.ref {
+      color: #d35400; }
   .gold body {
     background-color: #ad761e; }
     .gold body .reveal {
       color: #faeedc; }
+    .gold body .reveal a.ref {
+      color: #d99425; }
   body pre code {
     background: #222; }
 
@@ -217,14 +237,18 @@ body {
 /*********************************************
  * LINKS
  *********************************************/
+.reveal a.ref {
+  background-color: #ecf0f1;
+  padding: 3px; }
+
 .reveal a:not(.image) {
   color: #ecf0f1;
   text-decoration: none;
-  -webkit-transition: color .15s ease;
-  -moz-transition: color .15s ease;
-  -ms-transition: color .15s ease;
-  -o-transition: color .15s ease;
-  transition: color .15s ease; }
+  -webkit-transition: all .15s ease;
+  -moz-transition: all .15s ease;
+  -ms-transition: all .15s ease;
+  -o-transition: all .15s ease;
+  transition: all .15s ease; }
 
 .reveal a:not(.image):hover {
   color: white;
