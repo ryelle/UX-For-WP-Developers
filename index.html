@@ -516,6 +516,7 @@ function wcbos_create_post_type() {
 	// ... continued
 						</code></pre>
 						<p>Title, editor, featured image</p>
+						<p class="fragment"><code><a class="ref" href='http://queryposts.com/function/register_post_type/'>register_post_type()</a></code></p>
 					</section>
 					<section>
 						<h2>Create a Custom Taxonomy</h2>
@@ -541,6 +542,7 @@ function wcbos_create_post_type() {
 		'rewrite' => array( 'slug' => 'team' ),
 	) );
 }						</code></pre>
+						<p class="fragment"><code><a class="ref" href='http://queryposts.com/function/register_taxonomy/'>register_taxonomy()</a></code></p>
 					</section>
 					<section>
 						<h2>Extra Fields on a Post Type (setup)</h2>
@@ -555,7 +557,7 @@ function wcbos_add_metaboxes() {
 	// New metabox for person information: twitter, website, etc
 	add_meta_box( 
 		'wcbos-people-info', // ID
-		"Information", // Title
+		__( "Social Media" ), // Title
 		'wcbos_people_info_box', // Display callback
 		'wcbos-people', // Post type
 		'normal', // Context, 'normal', 'advanced', or 'side'
@@ -564,6 +566,7 @@ function wcbos_add_metaboxes() {
 	
 	// ... continued later ...
 }						</code></pre>
+						<p class="fragment"><code><a class="ref" href='http://queryposts.com/function/add_meta_box/'>add_meta_box()</a></code></p>
 					</section>
 					<section>
 						<h2>Extra Fields on a Post Type (display)</h2>
@@ -577,6 +580,7 @@ function wcbos_people_info_box() {
 	&lt;/p>
 	&lt;?php
 }						</code></pre>
+						<p class="fragment"><code><a class="ref" href='http://queryposts.com/function/get_post_meta/'>get_post_meta()</a></code></p>
 					</section>
 					<section>
 						<h2>Extra Fields on a Post Type (saving)</h2>
@@ -603,6 +607,7 @@ function wcbos_save_person_meta( $post_id ) {
 
 }
 						</code></pre>
+						<p class="fragment"><code><a class="ref" href='http://codex.wordpress.org/Plugin_API/Action_Reference/save_post'>save_post</a></code> &bull; <code><a class="ref" href='http://queryposts.com/function/update_post_meta/'>update_post_meta()</a></code></p>
 					</section>
 					<section>
 						<h2>Renaming the Featured Image</h2>
@@ -621,6 +626,7 @@ function wcbos_save_person_meta( $post_id ) {
 		'side' 
 	);
 }						</code></pre>
+						<p class="fragment"><code><a class="ref" href='http://queryposts.com/function/remove_meta_box/'>remove_meta_box()</a></code></p>
 					</section>
 					<section>
 						<h2>Update the Post Type Icon (non-MP6)</h2>
@@ -704,9 +710,6 @@ function wcbos_people_enter_title( $text, $post ) {
 						</code></pre>
 						<p class="fragment"><code><a class="ref" href='http://core.trac.wordpress.org/browser/tags/3.7/src/wp-admin/edit-form-advanced.php#L431'>enter_title_here</a></code></p>
 					</section>
-
-
-
 				</section>
 				
 				<!-- User Testing -->
