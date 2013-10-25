@@ -50,9 +50,18 @@
 							<a href="http://redradar.net">Kelly Dwan</a> [<a href="http://twitter.com/ryelle">@ryelle</a>]
 						</p>
 					</section>
-
 					<section>
-						<h3>We are people!</h3>
+						<div class="align-left">
+							<h2><strong>Mel Choyce</strong></h2>
+							<h3>Design Engineer<br />at Automattic</h3>
+						</div>
+						<div class="align-right">
+							<h2><strong>Kelly Dwan</strong></h2>
+							<h3>Web Engineer<br />at 10up</h3>
+						</div>
+					</section>
+					<section>
+						<h2>Volunteers?</h2>
 					</section>
 				</section>
 				
@@ -65,20 +74,27 @@
 						<h2>What is Usability?</h2>
 						<aside class="notes">
 							<p>How easy something is to use and learn</p>
+							<p>Can tasks be completed without intense frustration?</p>
 						</aside>
 					</section>
 					<section>
 						<h2>What is UX?</h2>
 						<aside class="notes">
-							<p>UX goes a level above usability — it's about how enjoyable a product is. It's about creating a pleasurable experience for our users. It's about making our users' lives easier. Usability should be the baseline, not the standard.</p>
+							<p>UX goes a level above usability — it's about how enjoyable a product is. It's about creating a pleasurable experience for our users. It's about making our users' lives easier. Usability should just be the baseline, not the standard. We don't just want our users to not be frustrated, we want them to be positive, even delighted.</p>
 						</aside>
 					</section>
 					<section>
-						<h2>UX in wp-admin</h2>
+						<h2>UX within wp-admin</h2>
+					</section>
+					<section>
 						<ol>
-							<li>Provide a familiar environment for your users to learn your new feature.</li>
-							<li>Don't make your users have to hunt around for things. Make them feel secure in knowing where things are.</li>
+							<li><h3>Provide a familiar environment</h3></li>
+							<li><h3>Don't make people hunt</h3></li>
 						</ol>
+						<aside class="notes">
+							<p>Provide a familiar environment for your users to learn your new feature.</p>
+							<p>Don't make your users have to hunt around for things. Make them feel secure in knowing where things are.</p>
+						</aside>
 					</section>
 				</section>
 				
@@ -87,26 +103,44 @@
 					<section>
 						<h2>Be one with WordPress</h2>
 						<aside class="notes">
-							<p>New features, such as plugins and themes, should always be seamlessly integrated into the WordPress admin interface.</p>
+							<p>New features, such as plugins and themes, should always be seamlessly integrated into the WordPress admin interface. It should never look like you're leaving WordPress — the fact that you're an extension of WordPress should be totally invisible. Your theme or plugin should feel like it belongs.</p>
 						</aside>
 					</section>
 					<section>
 						<h2>Use the Settings API</h2>
+						<img src="https://i.cloudup.com/EvbYHQHhou.png" />
 						<aside class="notes">
 							<p>When at all possible, you should be using the Settings API to create new admin pages for your plugins or themes.</p>
 						</aside>
 					</section>
 					<section>
-						<h3>Place your theme or plugin settings/configurations/actions in a logical location in the admin menu.</h3>
+						<h2>Put your options in logical locations</h2>
+						<aside class="notes">Place your theme or plugin settings/configurations/actions in a logical location in the admin menu.</aside>
 					</section>
 					<section>
-						<h4>When to make top-level menus</h4>
+						<h3>When to make top-level menus</h3>
+						<img src="https://i.cloudup.com/VTpI4BJgxO.png" />
+						<aside class="notes">
+							<p>Adding a top-level menu should only be considered if you really need multiple, related screens to make WordPress do something it was not originally designed to accomplish. Examples of new top-level menus might include conference management — tickets, speakers, sponsors, etc. — or even something as simple as a contact form.</p>
+							<p>Group your settings page in with this menu.</p>
+						</aside>
 					</section>
 					<section>
-						<h4>When to make sub-menus</h4>
+						<h3>When to make sub-menus</h3>
+						<img src="https://i.cloudup.com/TxXhKwe3Fx.png" />
+						<aside class="notes">
+							<p>If the creation of a top-level menu is not necessary, decide under what top-level menu to place your sub-level menu item. As a point of reference, most plugins add sub-level menu items underneath existing WordPress top-level menus. For example, the Backup plugin adds a sub-level menu option to the Tools top-level menu, or a gallery plugin could be added to the media top-level menu.</p>
+							<p>Pages should be labeled accurately so users will know what they will find on each page without having to guess. Keep labels short and concise.</p>
+							<p>Add your settings to existing settings pages, if it makes sense, otherwise add it as a sub-menu to the settings top-level menu.</p>
+						</aside>
 					</section>
 					<section>
-						<h3>Creating a custom icons for your plugins or custom post types is highly encouraged.</h3>
+						<h2>Create custom icons</h2>
+						<img src="https://i.cloudup.com/xDTLCHwY4m.png" />
+						<aside class="notes">
+							<p>If you are adding a top-level menu, then it's highly recommended that you add a custom icon which stylistically blends in with the rest of the admin icons.</p>
+							<p>Your icon should, by default, be black and white, with color on hover.</p>
+						</aside>
 					</section>
 				</section>			
 											
@@ -131,16 +165,20 @@
 						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
 add_action( 'admin_menu', 'wcbos_settings_page' );
 
-public function wcbos_settings_page() {
+function wcbos_settings_page() {
 	add_options_page( 
 		'WordCamp', // Page title
 		'WCBos Example Settings', // Menu title
-		'read', // Capability
+		'manage_options', // Capability
 		'wcbos-2013', // Slug
 		'wcbos_settings_page_render' // Display callback
 	);
 }						</code></pre>
 						<p class="fragment"><code><a class="ref" href='http://queryposts.com/function/add_options_page/'>add_options_page()</a></code></p>
+						<aside class="notes">
+							<p>There are a few other functions for this: add_dashboard_page(), add_posts_page(), add_media_page(), add_links_page(), add_pages_page(), add_comments_page(), add_theme_page(), add_plugins_page(), add_users_page(), add_management_page() [tools], add_options_page(). More generically, add_submenu_page() for any page, will also let you add to a CPT.</p>
+							<p>add_menu_page to add a page as a top-level item.</p>
+						</aside>
 					</section>
 					<section>
 						<h2>Tell WordPress about your settings</h2>
@@ -157,11 +195,14 @@ function wcbos_register_fields() {
 	// ... continued later ...
 }						</code></pre>
 						<p class="fragment"><code><a class="ref" href='http://queryposts.com/function/register_setting/'>register_setting()</a></code></p>
+						<aside class="notes">
+							<p>Later slides will continue this function (wcbos_register_fields), it's here that we set up all our fields.</p>
+						</aside>
 					</section>
 					<section>
 						<h2>Display the (empty) page</h2>
 						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
-public function wcbos_settings_page_render() {
+function wcbos_settings_page_render() {
 	?&gt;
 	&lt;div class="wrap"&gt;
 		&lt;h2&gt;WordCamp Boston Options&lt;/h2&gt;
@@ -339,13 +380,21 @@ function wcbos_validate( $input ) {
 				</section>
 				
 				<!-- Theme Options: UX -->
-				<section data-state="purple">
+				<section data-state="gold">
 					<section>
-						<h2>You probably don't need a "themes options" page.</h2>
+						<h2>You probably don't need<br /> a "themes options" page.</h2>
 						<aside class="notes">
 							<p>Most items you could put in a theme options page can go somewhere else.</p>
 							<p>Don’t take items that should be in the Appearance menu (like custom headers, background, etc.) and put them in your screen options page. They should stay as options in the Appearance menu. Also add them to the customizer!</p>
 						</aside>
+					</section>
+					<section>
+						<h2>Use the core Custom Header &amp; Custom Background functions</h2>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+add_theme_support( 'custom-background', $optional_defaults );
+add_theme_support( 'custom-header', $optional_defaults );
+						</code></pre>
+						<p class="fragment"><a class="ref" href='http://codex.wordpress.org/Custom_Headers'>Custom Headers</a> &bull; <a class="ref" href='http://codex.wordpress.org/Custom_Backgrounds'>Custom Backgrounds</a></p>
 					</section>
 					<section>
 						<h2>But I have special settings!</h2>
@@ -354,15 +403,24 @@ function wcbos_validate( $input ) {
 							<p>Have something like a theme slider? That could also be given a uniquely titled page.</p>
 						</aside>
 					</section>
-				</section>
-
-				<!-- Theme Options: Code -->
-				<section data-state="purple">
 					<section>
-						<h2>Theme Options</h2>
-						<ol>
-							<li>Stuff</li>
-						</ol>
+						<h2>Creating a settings page under Appearance</h2>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+add_action( 'admin_menu', 'wcbos_theme_page' );
+
+function wcbos_theme_page() {
+	add_theme_page( 
+		'Custom Logo', // Page title
+		'Custom Logo', // Menu title
+		'manage_options', // Capability
+		'custom-logo', // Slug
+		'wcbos_theme_page_render' // Display callback
+	);
+}						</code></pre>
+						<aside class="notes">
+							<p>Does this look familiar? If you've been paying attention, it should, as it's the same as the beginning of the settings API section.</p>
+						</aside>
+						<p class="fragment"><code><a class="ref" href='http://queryposts.com/function/add_theme_page/'>add_theme_page()</a></code></p>
 					</section>
 				</section>
 				
@@ -372,27 +430,51 @@ function wcbos_validate( $input ) {
 						<h2>Make better UI decisions</h2>
 					</section>
 					<section>
-						<h2>Make it easier for the user to find what they need</h2>
-						<h3>Chosen/select2</h3>
+						<h2>Make information more digestable</h2>
+						<p>We stole this from <a href="http://slides.helenhousandi.com/wcsf2013/#/">Helen</a>. Thanks Helen.</p>
+						<img src="https://i.cloudup.com/H2PFVvtH0A.png" />
+						<aside class="notes">
+							<p>Make it easier for the user to find what they need</p>
+							<p>Chosen/select2</p>
+						</aside>
 					</section>
 					<section>
-						<h2>Pick smarter locations</h2>
-						<h3>Add item --> Button</h3>
-						<h3>Formatting --> Editor</h3>
-						<h3>Meta data --> Meta box</h3> 
+						<h2>Place elements in logical locations</h2>
+						<img src="https://i.cloudup.com/MJJvHExvtK.png" />
+						<aside class="notes">
+							<p>Pick smarter locations:<p>
+							<ul>
+								<li>Add item --> Button</li>
+								<li>Formatting --> Editor</li>
+								<li>Meta data --> Meta box</li> 
+							</ul>
+						</aside>
 					</section>
 					<section>
 						<h2>Tailor your screens</h2>
-						<h3>Remove what you don't need</h3>
-						<h3>Replace what you do (strings, etc.)</h3>
+						<img src="https://i.cloudup.com/HoDAYTRbSG.png" />
+						<aside class="notes">
+							<p>Remove what you don't need</p>
+							<p>Replace what you do (strings, etc.)</p>
+						</aside>
 					</section>
 					<section>
 						<h2>Don't overwhelm users with options</h2>
-						<h3>What are the options or features that 80% of your users need?</h3>
-						<h3>Hide the rest in screen options (and document where they are)</h3>
+						<img src="https://i.cloudup.com/hccmvvgcOX.png" />
+						<aside class="notes">
+							<p>What are the options or features that 80% of your users need?</p>
+							<p>Hide the rest in screen options (and document where they are)</p>
+						</aside>
 					</section>
 					<section>
-						<h2>Respond to user actions</h2>
+						<h2>Respond to user's actions</h2>
+						<img src="https://i.cloudup.com/rZ8JxvtRHM.png" />
+						<aside class="notes">
+							<p>If users do something, they're expecting to receive feedback — a hover state on a button, a success message, something — always provide your users with that kind of feedback.</p>
+							<p>This is also a great place to sneak in some personality — an icon that changes from to a fun spinner while you save, a happy face when you complete a task, etc.</p>
+						</aside>
+					</section>
+					<section>
 						<blockquote>
 							<p>"Experiencing an app without good design feedback is like getting your high-five turned down."</p>
 							<em>~ @strevat</em>
@@ -400,19 +482,26 @@ function wcbos_validate( $input ) {
 					</section>
 					<section>
 						<h2>Clearly mark alerts and messages</h2>
+						<img src="https://i.cloudup.com/cwJoBACGW5.png" />
+						<aside class="notes">
+							<p>If you're telling your users something, generally it's something you want them to see. Don't let it fade into the background — make it another color, give it some special treatment, make it big... Just get their attention.</p>
+						</aside>
 					</section>
 					<section>
 						<h2>Write good error messages</h2>
+						<img src="https://i.cloudup.com/an2Qv7EoCJ.png" />
+						<aside class="notes">
 						<ul>
 							<li>Write for people, not machines</li>
 							<li>Explain what went wrong</li>
 							<li>Help users recover</li>
 						</ul>
+						</aside>
 					</section>
 				</section>
 				
 				<!-- Custom Content: Code -->
-				<section data-state="cyan">
+				<section data-state="seaweed">
 					<section>
 						<h2>Custom Content</h2>
 						<ol>
@@ -449,6 +538,10 @@ function wcbos_create_post_type() {
 	// ... continued
 						</code></pre>
 						<p>Title, editor, featured image</p>
+						<p class="fragment"><code><a class="ref" href='http://queryposts.com/function/register_post_type/'>register_post_type()</a></code></p>
+						<aside class="notes">
+							<p>Generally post types are singular names, this was a mistake I realized last night.</p>
+						</aside>
 					</section>
 					<section>
 						<h2>Create a Custom Taxonomy</h2>
@@ -474,6 +567,7 @@ function wcbos_create_post_type() {
 		'rewrite' => array( 'slug' => 'team' ),
 	) );
 }						</code></pre>
+						<p class="fragment"><code><a class="ref" href='http://queryposts.com/function/register_taxonomy/'>register_taxonomy()</a></code></p>
 					</section>
 					<section>
 						<h2>Extra Fields on a Post Type (setup)</h2>
@@ -488,7 +582,7 @@ function wcbos_add_metaboxes() {
 	// New metabox for person information: twitter, website, etc
 	add_meta_box( 
 		'wcbos-people-info', // ID
-		"Information", // Title
+		__( "Social Media" ), // Title
 		'wcbos_people_info_box', // Display callback
 		'wcbos-people', // Post type
 		'normal', // Context, 'normal', 'advanced', or 'side'
@@ -497,19 +591,48 @@ function wcbos_add_metaboxes() {
 	
 	// ... continued later ...
 }						</code></pre>
+						<p class="fragment"><code><a class="ref" href='http://queryposts.com/function/add_meta_box/'>add_meta_box()</a></code></p>
 					</section>
 					<section>
 						<h2>Extra Fields on a Post Type (display)</h2>
 						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
 function wcbos_people_info_box() {
-	echo "metabox";
+	$twitter = get_post_meta( $post->ID, 'twitter', true );
+	?>
+	&lt;p>
+		&lt;label for="info_twitter">Twitter:&lt;/label> 
+		&lt;input type="text" name="info_twitter" value="&lt;?php echo esc_attr( $twitter ); ?>" id="info_twitter" />
+	&lt;/p>
+	&lt;?php
 }						</code></pre>
+						<p class="fragment"><code><a class="ref" href='http://queryposts.com/function/get_post_meta/'>get_post_meta()</a></code></p>
 					</section>
 					<section>
 						<h2>Extra Fields on a Post Type (saving)</h2>
 						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
-???
+add_action( 'save_post', 'wcbos_save_post_meta' );
+
+function wcbos_save_person_meta( $post_id ) {
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
+		return;
+
+	if ( ! current_user_can( 'edit_post', $post_id ) )
+		return;
+
+	if ( ! isset( $_POST['person-info'] ) || ! wp_verify_nonce( $_POST['person-info'], 'save' ) )
+		return;
+
+	if ( isset( $_POST['info_twitter'] ) ){
+		update_post_meta( 
+			$post_id, // Post ID
+			'twitter', // Meta key
+			sanitize_text_field( $_POST['info_twitter'] ) // Value
+		);
+	}
+
+}
 						</code></pre>
+						<p class="fragment"><code><a class="ref" href='http://codex.wordpress.org/Plugin_API/Action_Reference/save_post'>save_post</a></code> &bull; <code><a class="ref" href='http://queryposts.com/function/update_post_meta/'>update_post_meta()</a></code></p>
 					</section>
 					<section>
 						<h2>Renaming the Featured Image</h2>
@@ -528,16 +651,27 @@ function wcbos_people_info_box() {
 		'side' 
 	);
 }						</code></pre>
-					</section>
-					<section>
-						<h2>Better Taxonomy UI</h2>
-						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
-Link to select2, chosen, but really just show a different interface.
-						</code></pre>
+						<p class="fragment"><code><a class="ref" href='http://queryposts.com/function/remove_meta_box/'>remove_meta_box()</a></code></p>
 					</section>
 					<section>
 						<h2>Update the Post Type Icon (non-MP6)</h2>
 						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+add_action( 'admin_head', 'wcbos_custom_icons' );
+
+function wcbos_custom_icons() { ?&gt;
+	&lt;style type="text/css" media="screen"&gt;
+		#adminmenu #menu-posts-wcbos-people .wp-menu-image {
+			/* Sprite for non-MP6 */
+			background-image: url(&lt;?php echo plugins_url('admin-users.png',__FILE__); ?&gt;);
+			background-position: 5px 4px;
+		}
+		#adminmenu #menu-posts-wcbos-people.wp-has-current-submenu .wp-menu-image,
+		#adminmenu #menu-posts-wcbos-people a:hover .wp-menu-image {
+			background-position: 5px -23px;
+		}
+	&lt;/style&gt;
+&lt;?php }
+
 						</code></pre>
 					</section>
 					<section>
@@ -545,7 +679,7 @@ Link to select2, chosen, but really just show a different interface.
 						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
 add_action( 'admin_head', 'wcbos_custom_icons' );
 
-function custom_icons() { ?&gt;
+function wcbos_custom_icons() { ?&gt;
 	&lt;style type="text/css" media="screen"&gt;
 	.mp6 #adminmenu #menu-posts-wcbos-people .wp-menu-image:before {
 		content: '\f307';
@@ -558,30 +692,130 @@ function custom_icons() { ?&gt;
 					<section>
 						<h2>Update Strings With Relevant Text</h2>
 						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+&lt;?php
+add_filter( 'post_updated_messages', 'wcbos_people_updated_messages' ) );
+
+function wcbos_people_updated_messages( $messages = array() ) {
+	global $post, $post_ID;
+	
+	$messages['wcbos-people'] = array(
+		0  => '', // Unused. Messages start at index 1.
+		1  => sprintf( __( 'Person updated. <a href="%s">View person</a>.', 'textdomain' ), esc_url( get_permalink( $post_ID ) ) ),
+		2  => __( 'Custom field updated.', 'textdomain' ),
+		3  => __( 'Custom field deleted.', 'textdomain' ),
+		4  => __( 'Person updated.', 'textdomain' ),
+		/* translators: %s: date and time of the revision */
+		5  => isset( $_GET['revision'] ) ? sprintf( __( 'Person restored to revision from %s', 'textdomain' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
+		6  => sprintf( __( 'Person published. <a href="%s">View slide</a>', 'textdomain' ), esc_url( get_permalink( $post_ID ) ) ),
+		7  => __( 'Person saved.', 'textdomain' ),
+		8  => sprintf( __( 'Person submitted. <a target="_blank" href="%s">Preview slide</a>', 'textdomain' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ) ),
+		9  => sprintf( __( 'Person scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview person</a>', 'textdomain' ),
+			// translators: Publish box date format, see http://php.net/date
+			date_i18n( __( 'M j, Y @ G:i', 'textdomain' ), strtotime( $post->post_date ) ), esc_url( get_permalink( $post_ID ) ) ),
+		10 => sprintf( __( 'Person draft updated. <a target="_blank" href="%s">Preview person</a>', 'textdomain' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ) ),
+	);
+	
+	return $messages;
+}
 						</code></pre>
+						<p class="fragment"><code><a class="ref" href='http://core.trac.wordpress.org/browser/tags/3.7/src/wp-admin/edit-form-advanced.php#L70'>post_updated_messages</a></code></p>
+					</section>
+					<section>
+						<h2>Update Strings With Relevant Text</h2>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+&lt;?php
+add_filter( 'enter_title_here', 'wcbos_people_enter_title', 10, 2 );
+
+function wcbos_people_enter_title( $text, $post ) {
+	if ( $post->post_type == 'wcbos-people' )
+		$text = __( "Enter name here" );
+	
+	return $text;
+}
+						</code></pre>
+						<p class="fragment"><code><a class="ref" href='http://core.trac.wordpress.org/browser/tags/3.7/src/wp-admin/edit-form-advanced.php#L431'>enter_title_here</a></code></p>
 					</section>
 				</section>
 				
 				<!-- User Testing -->
-				<section data-state="seaweed">
+				<section data-state="green">
 					<section>
 						<h2>User Testing</h2>
 					</section>
 					<section>
 						<h2>What</h2>
+						<aside class="notes">
+							<p>A formalized method for testing your product with your user group</p>
+							<p>Qualitative, usually pretty informal</p>
+						</aside>
 					</section>
 					<section>
 						<h2>Why</h2>
+						<ol>
+							<h3><li>Cheap</li></h3>
+							<h3><li>Easy</li></h3>
+							<h3><li>Fast</li></h3>
+						</ol>
+						<aside class="notes">
+							<p>All sites/products have problems</p>
+							<p>Most serious problems get identified pretty quickly — Great way to identify the biggest usability issues in your product</p>
+							<p>Usually also identifies a lot of quick wins to fix</p>
+							<p>It makes you a better creator</p>
+						</aside>
 					</section>
 					<section>
 						<h2>How</h2>
+					</section>
+					<section>
+						<h3>Recruit to fill 3-5 tests</h3>
+						<aside class="notes">
+							<p>Steve Krug says 3, Jakob Nielsen says 5, but even 1-2 are better than 0</p>
+						</aside>
+					</section>
+					<section>
+						<h3>Write your tasks</h3>
+						<aside class="notes">
+							<p>Tasks are things like: Install plugin. Configure plugin to do X thing. Check to see if it is working. etc.</p>
+							<p>Should be the most important features of your product</p>
+						</aside>
+					</section>
+					<section>
+						<h3>Turn tasks into scenarios</h3>
+						<aside class="notes">
+							<p>Scenario: you're a photo blogger and you want to install a plugin which enhances WordPress' internal galleries. You've heard x plugin is great. Install x plugin to your WordPress site.</p>
+						</aside>
+					</section>
+					<section>
+						<h3>Test run your test internally</h3>
+					</section>
+					<section>
+						<h3>Record screen</h3>
+						<aside class="notes">
+							<p>Lots of services to do this: camtasia, silverback, etc.</p>
+						</aside>
+					</section>
+					<section>
+						<h3>Don't explain, just watch</h3>
+						<aside class="notes">
+							<p>If your users asks you what to do or are confused, ask them where they think they'd be able to do x</p>
+						</aside>
+					</section>
+					<section>
+						<h3>You can test remotely, too</h3>
+						<aside class="notes">
+							<p>For wp core and wpcom, we use usertesting.com</p>
+						</aside>
+					</section>
+					<section>
+						<h2>Rocket Surgery Made Easy</h2>
+						<img src="https://i.cloudup.com/WBBp3WM9D3.png" />
 					</section>
 					<section>
 						<h2>Let's do it!</h2>
 					</section>
 				</section>
 
-				<section>
+				<section data-state="grass">
 					<h1>THE END</h1>
 				</section>
 
@@ -606,6 +840,13 @@ function custom_icons() { ?&gt;
 				transition: 'linear', // default/cube/page/concave/zoom/linear/fade/none
 				backgroundTransition: 'slide',
 
+//				multiplex: {
+//			        // Example values. To generate your own, see the socket.io server instructions.
+//			        secret: '13826458942424999220',
+//			        id: '53db137dfa1a19cc', // Obtained from socket.io server
+//			        url: 'revealjs.jit.su:80' // Location of socket.io server
+//			    },
+
 				// Optional libraries used to extend on reveal.js
 				dependencies: [
 					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
@@ -614,6 +855,10 @@ function custom_icons() { ?&gt;
 					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
 					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
 					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					
+//					{ src: 'socket.io/socket.io.js', async: true },
+//					{ src: 'plugin/multiplex/master.js', async: true },
+//					{ src: 'plugin/notes-server/client.js', async: true }
 				]
 			});
 

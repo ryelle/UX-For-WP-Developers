@@ -22,6 +22,15 @@ body {
   color: white;
   background: #ecf0f1;
   text-shadow: none; }
+  
+.align-left {
+	float: left; }
+.align-right {
+	float: right; }
+	
+.reveal blockquote {
+	padding: 1em 1.5em;
+}
 
 /*********************************************
  * HEADERS
@@ -35,7 +44,7 @@ body {
   margin: 0 0 20px 0;
   color: #eeeeee;
   font-family: "Source Sans Pro", sans-serif;
-  line-height: 0.9em;
+  line-height: 1.2em;
   letter-spacing: 0.02em;
   text-transform: none;
   text-shadow: none; }
@@ -225,7 +234,7 @@ body {
   margin: 0 0 20px 0;
   color: #eeeeee;
   font-family: "Source Sans Pro", sans-serif;
-  line-height: 1;
+  line-height: 1.2;
   letter-spacing: 0;
   font-weight: 200;
   text-transform: none;
