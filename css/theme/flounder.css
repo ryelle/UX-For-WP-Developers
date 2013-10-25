@@ -27,6 +27,10 @@ body {
 	float: left; }
 .align-right {
 	float: right; }
+	
+.reveal blockquote {
+	padding: 1em 1.5em;
+}
 
 /*********************************************
  * HEADERS
