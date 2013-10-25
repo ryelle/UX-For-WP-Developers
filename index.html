@@ -131,16 +131,20 @@
 						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
 add_action( 'admin_menu', 'wcbos_settings_page' );
 
-public function wcbos_settings_page() {
+function wcbos_settings_page() {
 	add_options_page( 
 		'WordCamp', // Page title
 		'WCBos Example Settings', // Menu title
-		'read', // Capability
+		'manage_options', // Capability
 		'wcbos-2013', // Slug
 		'wcbos_settings_page_render' // Display callback
 	);
 }						</code></pre>
 						<p class="fragment"><code><a class="ref" href='http://queryposts.com/function/add_options_page/'>add_options_page()</a></code></p>
+						<aside class="notes">
+							<p>There are a few other functions for this: add_dashboard_page(), add_posts_page(), add_media_page(), add_links_page(), add_pages_page(), add_comments_page(), add_theme_page(), add_plugins_page(), add_users_page(), add_management_page() [tools], add_options_page(). More generically, add_submenu_page() for any page, will also let you add to a CPT.</p>
+							<p>add_menu_page to add a page as a top-level item.</p>
+						</aside>
 					</section>
 					<section>
 						<h2>Tell WordPress about your settings</h2>
@@ -161,7 +165,7 @@ function wcbos_register_fields() {
 					<section>
 						<h2>Display the (empty) page</h2>
 						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
-public function wcbos_settings_page_render() {
+function wcbos_settings_page_render() {
 	?&gt;
 	&lt;div class="wrap"&gt;
 		&lt;h2&gt;WordCamp Boston Options&lt;/h2&gt;
@@ -341,11 +345,19 @@ function wcbos_validate( $input ) {
 				<!-- Theme Options: UX -->
 				<section data-state="purple">
 					<section>
-						<h2>You probably don't need a "themes options" page.</h2>
+						<h2>You probably don't need<br /> a "themes options" page.</h2>
 						<aside class="notes">
 							<p>Most items you could put in a theme options page can go somewhere else.</p>
 							<p>Don’t take items that should be in the Appearance menu (like custom headers, background, etc.) and put them in your screen options page. They should stay as options in the Appearance menu. Also add them to the customizer!</p>
 						</aside>
+					</section>
+					<section>
+						<h2>Use the core Custom Header &amp; Custom Background functions</h2>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+add_theme_support( 'custom-background', $optional_defaults );
+add_theme_support( 'custom-header', $optional_defaults );
+						</code></pre>
+						<p class="fragment"><a class="ref" href='http://codex.wordpress.org/Custom_Headers'>Custom Headers</a> &bull; <a class="ref" href='http://codex.wordpress.org/Custom_Backgrounds'>Custom Backgrounds</a></p>
 					</section>
 					<section>
 						<h2>But I have special settings!</h2>
@@ -354,15 +366,24 @@ function wcbos_validate( $input ) {
 							<p>Have something like a theme slider? That could also be given a uniquely titled page.</p>
 						</aside>
 					</section>
-				</section>
-
-				<!-- Theme Options: Code -->
-				<section data-state="purple">
 					<section>
-						<h2>Theme Options</h2>
-						<ol>
-							<li>Stuff</li>
-						</ol>
+						<h2>Creating a settings page under Appearance</h2>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+add_action( 'admin_menu', 'wcbos_theme_page' );
+
+function wcbos_theme_page() {
+	add_theme_page( 
+		'Custom Logo', // Page title
+		'Custom Logo', // Menu title
+		'manage_options', // Capability
+		'custom-logo', // Slug
+		'wcbos_theme_page_render' // Display callback
+	);
+}						</code></pre>
+						<aside class="notes">
+							<p>Does this look familiar? If you've been paying attention, it should, as it's the same as the beginning of the settings API section.</p>
+						</aside>
+						<p class="fragment"><code><a class="ref" href='http://queryposts.com/function/add_theme_page/'>add_theme_page()</a></code></p>
 					</section>
 				</section>
 				
@@ -412,7 +433,7 @@ function wcbos_validate( $input ) {
 				</section>
 				
 				<!-- Custom Content: Code -->
-				<section data-state="cyan">
+				<section data-state="seaweed">
 					<section>
 						<h2>Custom Content</h2>
 						<ol>
@@ -563,7 +584,7 @@ function custom_icons() { ?&gt;
 				</section>
 				
 				<!-- User Testing -->
-				<section data-state="seaweed">
+				<section data-state="green">
 					<section>
 						<h2>User Testing</h2>
 					</section>
@@ -581,7 +602,7 @@ function custom_icons() { ?&gt;
 					</section>
 				</section>
 
-				<section>
+				<section data-state="grass">
 					<h1>THE END</h1>
 				</section>
 
