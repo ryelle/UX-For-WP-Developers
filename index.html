@@ -87,6 +87,7 @@
 						<h2>UX within wp-admin</h2>
 						<aside class="notes">
 							<p>So, how many of you have installed a theme or a plugin, and then had no idea what to do next to get it working?</p>
+							<p>Yeah, that probably wasn't a great experience for you.</p>
 						</aside>
 					</section>
 					<section>
@@ -95,6 +96,7 @@
 							<li><h3>Don't make people hunt</h3></li>
 						</ol>
 						<aside class="notes">
+							<p>When you're adding features to wp-admin, there are two things you want to make sure you do.</p>
 							<p>Provide a familiar environment for your users to learn your new feature.</p>
 							<p>Don't make your users have to hunt around for things. Make them feel secure in knowing where things are.</p>
 						</aside>
@@ -114,6 +116,7 @@
 						<img src="https://i.cloudup.com/EvbYHQHhou.png" />
 						<aside class="notes">
 							<p>When at all possible, you should be using the Settings API to create new admin pages for your plugins or themes.</p>
+							<p>Otherwise, if WordPress decides to go and, oh, totally change the admin styles... Your new pages look terrible.</p>
 						</aside>
 					</section>
 					<section>
@@ -124,7 +127,7 @@
 						<h3>When to make top-level menus</h3>
 						<img src="https://i.cloudup.com/VTpI4BJgxO.png" />
 						<aside class="notes">
-							<p>Adding a top-level menu should only be considered if you really need multiple, related screens to make WordPress do something it was not originally designed to accomplish. Examples of new top-level menus might include conference management — tickets, speakers, sponsors, etc. — or even something as simple as a contact form.</p>
+							<p>Adding a top-level menu should only be considered if you really need multiple, related screens to make WordPress do something it was not originally designed to accomplish, or are adding a totally new content type. Examples of new top-level menus might include conference management — tickets, speakers, sponsors, etc.</p>
 							<p>Group your settings page in with this menu.</p>
 						</aside>
 					</section>
@@ -132,7 +135,7 @@
 						<h3>When to make sub-menus</h3>
 						<img src="https://i.cloudup.com/TxXhKwe3Fx.png" />
 						<aside class="notes">
-							<p>If the creation of a top-level menu is not necessary, decide under what top-level menu to place your sub-level menu item. As a point of reference, most plugins add sub-level menu items underneath existing WordPress top-level menus. For example, the Backup plugin adds a sub-level menu option to the Tools top-level menu, or a gallery plugin could be added to the media top-level menu.</p>
+							<p>If you don't need a top-level menu, decide which menu to add your plugin or theme options to. Most plugins add sub-level menu items within existing WordPress menus. For example, a backup plugin adds a page to the Tools top-level menu, or a gallery plugin could be added to the media top-level menu.</p>
 							<p>Pages should be labeled accurately so users will know what they will find on each page without having to guess. Keep labels short and concise.</p>
 							<p>Add your settings to existing settings pages, if it makes sense, otherwise add it as a sub-menu to the settings top-level menu.</p>
 						</aside>
@@ -144,6 +147,10 @@
 							<p>If you are adding a top-level menu, then it's highly recommended that you add a custom icon which stylistically blends in with the rest of the admin icons.</p>
 							<p>Your icon should, by default, be black and white, with color on hover.</p>
 						</aside>
+					</section>
+					<section>
+						<h2>:(</h2>
+						<img src="https://cloudup.com/cQU8bILJfvu" />
 					</section>
 				</section>			
 											
@@ -431,6 +438,9 @@ function wcbos_theme_page() {
 				<section data-state="cyan">
 					<section>
 						<h2>Make better UI decisions</h2>
+						<section class="notes">
+							<p>Let's talk a little bit about making good UI decisions. This is where we're going to go from your plugin or theme being just usable, to it being a great experience.</p>
+						</section>
 					</section>
 					<section>
 						<h2>Make information more digestable</h2>
@@ -438,7 +448,7 @@ function wcbos_theme_page() {
 						<img src="https://i.cloudup.com/H2PFVvtH0A.png" />
 						<aside class="notes">
 							<p>Make it easier for the user to find what they need</p>
-							<p>Chosen/select2</p>
+							<p>In this case, they had a bunch of different taxonomies that could be applied to their custom post type. Instead of having a huge jumble of checkbox lists, they consolidated it into one metabox with smarter selection using a library called Chosen. Then for age, instead of checkboxes, they replaced it with a slider.</p>
 						</aside>
 					</section>
 					<section>
@@ -492,7 +502,7 @@ function wcbos_theme_page() {
 					</section>
 					<section>
 						<h2>Write good error messages</h2>
-						<img src="https://i.cloudup.com/an2Qv7EoCJ.png" />
+						<img src="https://i.cloudup.com/3MLh2YUDUp.png" />
 						<aside class="notes">
 						<ul>
 							<li>Write for people, not machines</li>
@@ -760,9 +770,8 @@ function wcbos_people_enter_title( $text, $post ) {
 							<h3><li>Fast</li></h3>
 						</ol>
 						<aside class="notes">
-							<p>All sites/products have problems</p>
-							<p>Most serious problems get identified pretty quickly — Great way to identify the biggest usability issues in your product</p>
-							<p>Usually also identifies a lot of quick wins to fix</p>
+							<p>You can do it cheap, it's easy, and it's fast.</p>
+							<p>All sites/products have problems. Most serious problems get identified pretty quickly — Great way to identify the biggest usability issues in your product. Usually also identifies a lot of quick wins to fix</p>
 							<p>It makes you a better creator</p>
 						</aside>
 					</section>
@@ -815,6 +824,14 @@ function wcbos_people_enter_title( $text, $post ) {
 					</section>
 					<section>
 						<h2>Let's do it!</h2>
+						<aside class="notes">
+							<ol>
+								<li>Write down or start thinking of a bunch of tasks users face when using your theme or plugin</li>
+								<li>Narrow it down to 3-5 tasks</li>
+								<li>Start writing scenarios based on those tasks</li>
+								<li>Let's test with someone!</li>
+							</ol>
+						</aside>
 					</section>
 				</section>
 
