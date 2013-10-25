@@ -87,14 +87,12 @@
 						<h2>UX within wp-admin</h2>
 					</section>
 					<section>
-						<h3>1. Provide a familiar environment</h3>
+						<ol>
+							<li><h3>Provide a familiar environment</h3></li>
+							<li><h3>Don't make people hunt</h3></li>
+						</ol>
 						<aside class="notes">
 							<p>Provide a familiar environment for your users to learn your new feature.</p>
-						</aside>
-					</section>
-					<section>
-						<h3>2. Don't make people hunt</h3>
-						<aside class="notes">
 							<p>Don't make your users have to hunt around for things. Make them feel secure in knowing where things are.</p>
 						</aside>
 					</section>
@@ -110,6 +108,7 @@
 					</section>
 					<section>
 						<h2>Use the Settings API</h2>
+						<img src="https://i.cloudup.com/EvbYHQHhou.png" />
 						<aside class="notes">
 							<p>When at all possible, you should be using the Settings API to create new admin pages for your plugins or themes.</p>
 						</aside>
@@ -120,6 +119,7 @@
 					</section>
 					<section>
 						<h3>When to make top-level menus</h3>
+						<img src="https://i.cloudup.com/VTpI4BJgxO.png" />
 						<aside class="notes">
 							<p>Adding a top-level menu should only be considered if you really need multiple, related screens to make WordPress do something it was not originally designed to accomplish. Examples of new top-level menus might include conference management — tickets, speakers, sponsors, etc. — or even something as simple as a contact form.</p>
 							<p>Group your settings page in with this menu.</p>
@@ -127,6 +127,7 @@
 					</section>
 					<section>
 						<h3>When to make sub-menus</h3>
+						<img src="https://i.cloudup.com/TxXhKwe3Fx.png" />
 						<aside class="notes">
 							<p>If the creation of a top-level menu is not necessary, decide under what top-level menu to place your sub-level menu item. As a point of reference, most plugins add sub-level menu items underneath existing WordPress top-level menus. For example, the Backup plugin adds a sub-level menu option to the Tools top-level menu, or a gallery plugin could be added to the media top-level menu.</p>
 							<p>Pages should be labeled accurately so users will know what they will find on each page without having to guess. Keep labels short and concise.</p>
@@ -135,6 +136,7 @@
 					</section>
 					<section>
 						<h2>Create custom icons</h2>
+						<img src="https://i.cloudup.com/xDTLCHwY4m.png" />
 						<aside class="notes">
 							<p>If you are adding a top-level menu, then it's highly recommended that you add a custom icon which stylistically blends in with the rest of the admin icons.</p>
 							<p>Your icon should, by default, be black and white, with color on hover.</p>
@@ -429,6 +431,8 @@ function wcbos_theme_page() {
 					</section>
 					<section>
 						<h2>Make information more digestable</h2>
+						<p>We stole this from <a href="http://slides.helenhousandi.com/wcsf2013/#/">Helen</a>. Thanks Helen.</p>
+						<img src="https://i.cloudup.com/H2PFVvtH0A.png" />
 						<aside class="notes">
 							<p>Make it easier for the user to find what they need</p>
 							<p>Chosen/select2</p>
@@ -485,6 +489,7 @@ function wcbos_theme_page() {
 					</section>
 					<section>
 						<h2>Write good error messages</h2>
+						<img src="https://i.cloudup.com/an2Qv7EoCJ.png" />
 						<aside class="notes">
 						<ul>
 							<li>Write for people, not machines</li>
@@ -739,12 +744,71 @@ function wcbos_people_enter_title( $text, $post ) {
 					</section>
 					<section>
 						<h2>What</h2>
+						<aside class="notes">
+							<p>A formalized method for testing your product with your user group</p>
+							<p>Qualitative, usually pretty informal</p>
+						</aside>
 					</section>
 					<section>
 						<h2>Why</h2>
+						<ol>
+							<h3><li>Cheap</li></h3>
+							<h3><li>Easy</li></h3>
+							<h3><li>Fast</li></h3>
+						</ol>
+						<aside class="notes">
+							<p>All sites/products have problems</p>
+							<p>Most serious problems get identified pretty quickly — Great way to identify the biggest usability issues in your product</p>
+							<p>Usually also identifies a lot of quick wins to fix</p>
+							<p>It makes you a better creator</p>
+						</aside>
 					</section>
 					<section>
 						<h2>How</h2>
+					</section>
+					<section>
+						<h3>Recruit to fill 3-5 tests</h3>
+						<aside class="notes">
+							<p>Steve Krug says 3, Jakob Nielsen says 5, but even 1-2 are better than 0</p>
+						</aside>
+					</section>
+					<section>
+						<h3>Write your tasks</h3>
+						<aside class="notes">
+							<p>Tasks are things like: Install plugin. Configure plugin to do X thing. Check to see if it is working. etc.</p>
+							<p>Should be the most important features of your product</p>
+						</aside>
+					</section>
+					<section>
+						<h3>Turn tasks into scenarios</h3>
+						<aside class="notes">
+							<p>Scenario: you're a photo blogger and you want to install a plugin which enhances WordPress' internal galleries. You've heard x plugin is great. Install x plugin to your WordPress site.</p>
+						</aside>
+					</section>
+					<section>
+						<h3>Test run your test internally</h3>
+					</section>
+					<section>
+						<h3>Record screen</h3>
+						<aside class="notes">
+							<p>Lots of services to do this: camtasia, silverback, etc.</p>
+						</aside>
+					</section>
+					<section>
+						<h3>Don't explain, just watch</h3>
+						<aside class="notes">
+							<p>If your users asks you what to do or are confused, ask them where they think they'd be able to do x</p>
+						</aside>
+					</section>
+					<section>
+						<h3>You can test remotely, too</h3>
+						<aside class="notes">
+							<p>For wp core and wpcom, we use usertesting.com</p>
+						</aside>
+					</section>
+					<section>
+						<h2>Rocket Surgery Made Easy</h2>
+						<img src="https://i.cloudup.com/WBBp3WM9D3.png" />
 					</section>
 					<section>
 						<h2>Let's do it!</h2>
