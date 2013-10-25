@@ -569,13 +569,39 @@ function wcbos_add_metaboxes() {
 						<h2>Extra Fields on a Post Type (display)</h2>
 						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
 function wcbos_people_info_box() {
-	echo "metabox";
+	$twitter = get_post_meta( $post->ID, 'twitter', true );
+	?>
+	&lt;p>
+		&lt;label for="info_twitter">Twitter:&lt;/label> 
+		&lt;input type="text" name="info_twitter" value="&lt;?php echo esc_attr( $twitter ); ?>" id="info_twitter" />
+	&lt;/p>
+	&lt;?php
 }						</code></pre>
 					</section>
 					<section>
 						<h2>Extra Fields on a Post Type (saving)</h2>
 						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
-???
+add_action( 'save_post', 'wcbos_save_post_meta' );
+
+function wcbos_save_person_meta( $post_id ) {
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
+		return;
+
+	if ( ! isset( $_POST['person-info'] ) || ! wp_verify_nonce( $_POST['person-info'], 'save' ) )
+		return;
+
+	if ( ! current_user_can( 'edit_post', $post_id ) )
+		return;
+
+	if ( isset( $_POST['info_twitter'] ) ){
+		update_post_meta( 
+			$post_id, // Post ID
+			'twitter', // Meta key
+			sanitize_text_field( $_POST['info_twitter'] ) // Value
+		);
+	}
+
+}
 						</code></pre>
 					</section>
 					<section>
@@ -597,14 +623,24 @@ function wcbos_people_info_box() {
 }						</code></pre>
 					</section>
 					<section>
-						<h2>Better Taxonomy UI</h2>
-						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
-Link to select2, chosen, but really just show a different interface.
-						</code></pre>
-					</section>
-					<section>
 						<h2>Update the Post Type Icon (non-MP6)</h2>
 						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+add_action( 'admin_head', 'wcbos_custom_icons' );
+
+function wcbos_custom_icons() { ?&gt;
+	&lt;style type="text/css" media="screen"&gt;
+		#adminmenu #menu-posts-wcbos-people .wp-menu-image {
+			/* Sprite for non-MP6 */
+			background-image: url(&lt;?php echo plugins_url('admin-users.png',__FILE__); ?&gt;);
+			background-position: 5px 4px;
+		}
+		#adminmenu #menu-posts-wcbos-people.wp-has-current-submenu .wp-menu-image,
+		#adminmenu #menu-posts-wcbos-people a:hover .wp-menu-image {
+			background-position: 5px -23px;
+		}
+	&lt;/style&gt;
+&lt;?php }
+
 						</code></pre>
 					</section>
 					<section>
@@ -612,7 +648,7 @@ Link to select2, chosen, but really just show a different interface.
 						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
 add_action( 'admin_head', 'wcbos_custom_icons' );
 
-function custom_icons() { ?&gt;
+function wcbos_custom_icons() { ?&gt;
 	&lt;style type="text/css" media="screen"&gt;
 	.mp6 #adminmenu #menu-posts-wcbos-people .wp-menu-image:before {
 		content: '\f307';
@@ -625,8 +661,52 @@ function custom_icons() { ?&gt;
 					<section>
 						<h2>Update Strings With Relevant Text</h2>
 						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+&lt;?php
+add_filter( 'post_updated_messages', 'wcbos_people_updated_messages' ) );
+
+function wcbos_people_updated_messages( $messages = array() ) {
+	global $post, $post_ID;
+	
+	$messages['wcbos-people'] = array(
+		0  => '', // Unused. Messages start at index 1.
+		1  => sprintf( __( 'Person updated. <a href="%s">View person</a>.', 'textdomain' ), esc_url( get_permalink( $post_ID ) ) ),
+		2  => __( 'Custom field updated.', 'textdomain' ),
+		3  => __( 'Custom field deleted.', 'textdomain' ),
+		4  => __( 'Person updated.', 'textdomain' ),
+		/* translators: %s: date and time of the revision */
+		5  => isset( $_GET['revision'] ) ? sprintf( __( 'Person restored to revision from %s', 'textdomain' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
+		6  => sprintf( __( 'Person published. <a href="%s">View slide</a>', 'textdomain' ), esc_url( get_permalink( $post_ID ) ) ),
+		7  => __( 'Person saved.', 'textdomain' ),
+		8  => sprintf( __( 'Person submitted. <a target="_blank" href="%s">Preview slide</a>', 'textdomain' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ) ),
+		9  => sprintf( __( 'Person scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview person</a>', 'textdomain' ),
+			// translators: Publish box date format, see http://php.net/date
+			date_i18n( __( 'M j, Y @ G:i', 'textdomain' ), strtotime( $post->post_date ) ), esc_url( get_permalink( $post_ID ) ) ),
+		10 => sprintf( __( 'Person draft updated. <a target="_blank" href="%s">Preview person</a>', 'textdomain' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ) ),
+	);
+	
+	return $messages;
+}
 						</code></pre>
+						<p class="fragment"><code><a class="ref" href='http://core.trac.wordpress.org/browser/tags/3.7/src/wp-admin/edit-form-advanced.php#L70'>post_updated_messages</a></code></p>
 					</section>
+					<section>
+						<h2>Update Strings With Relevant Text</h2>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+&lt;?php
+add_filter( 'enter_title_here', 'wcbos_people_enter_title', 10, 2 );
+
+function wcbos_people_enter_title( $text, $post ) {
+	if ( $post->post_type == 'wcbos-people' )
+		$text = __( "Enter name here" );
+	
+	return $text;
+}
+						</code></pre>
+						<p class="fragment"><code><a class="ref" href='http://core.trac.wordpress.org/browser/tags/3.7/src/wp-admin/edit-form-advanced.php#L431'>enter_title_here</a></code></p>
+					</section>
+
+
+
 				</section>
 				
 				<!-- User Testing -->
