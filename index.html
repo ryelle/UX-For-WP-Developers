@@ -65,20 +65,29 @@
 						<h2>What is Usability?</h2>
 						<aside class="notes">
 							<p>How easy something is to use and learn</p>
+							<p>Can tasks be completed without intense frustration?</p>
 						</aside>
 					</section>
 					<section>
 						<h2>What is UX?</h2>
 						<aside class="notes">
-							<p>UX goes a level above usability — it's about how enjoyable a product is. It's about creating a pleasurable experience for our users. It's about making our users' lives easier. Usability should be the baseline, not the standard.</p>
+							<p>UX goes a level above usability — it's about how enjoyable a product is. It's about creating a pleasurable experience for our users. It's about making our users' lives easier. Usability should just be the baseline, not the standard. We don't just want our users to not be frustrated, we want them to be positive, even delighted.</p>
 						</aside>
 					</section>
 					<section>
-						<h2>UX in wp-admin</h2>
-						<ol>
-							<li>Provide a familiar environment for your users to learn your new feature.</li>
-							<li>Don't make your users have to hunt around for things. Make them feel secure in knowing where things are.</li>
-						</ol>
+						<h2>UX within wp-admin</h2>
+					</section>
+					<section>
+						<h3>1. Provide a familiar environment</h3>
+						<aside class="notes">
+							<p>Provide a familiar environment for your users to learn your new feature.</p>
+						</aside>
+					</section>
+					<section>
+						<h3>2. Don't make people hunt</h3>
+						<aside class="notes">
+							<p>Don't make your users have to hunt around for things. Make them feel secure in knowing where things are.</p>
+						</aside>
 					</section>
 				</section>
 				
@@ -87,7 +96,7 @@
 					<section>
 						<h2>Be one with WordPress</h2>
 						<aside class="notes">
-							<p>New features, such as plugins and themes, should always be seamlessly integrated into the WordPress admin interface.</p>
+							<p>New features, such as plugins and themes, should always be seamlessly integrated into the WordPress admin interface. It should never look like you're leaving WordPress — the fact that you're an extension of WordPress should be totally invisible. Your theme or plugin should feel like it belongs.</p>
 						</aside>
 					</section>
 					<section>
@@ -97,16 +106,30 @@
 						</aside>
 					</section>
 					<section>
-						<h3>Place your theme or plugin settings/configurations/actions in a logical location in the admin menu.</h3>
+						<h2>Put your options in logical locations</h2>
+						<aside class="notes">Place your theme or plugin settings/configurations/actions in a logical location in the admin menu.</aside>
 					</section>
 					<section>
-						<h4>When to make top-level menus</h4>
+						<h3>When to make top-level menus</h3>
+						<aside class="notes">
+							<p>Adding a top-level menu should only be considered if you really need multiple, related screens to make WordPress do something it was not originally designed to accomplish. Examples of new top-level menus might include conference management — tickets, speakers, sponsors, etc. — or even something as simple as a contact form.</p>
+							<p>Group your settings page in with this menu.</p>
+						</aside>
 					</section>
 					<section>
-						<h4>When to make sub-menus</h4>
+						<h3>When to make sub-menus</h3>
+						<aside class="notes">
+							<p>If the creation of a top-level menu is not necessary, decide under what top-level menu to place your sub-level menu item. As a point of reference, most plugins add sub-level menu items underneath existing WordPress top-level menus. For example, the Backup plugin adds a sub-level menu option to the Tools top-level menu, or a gallery plugin could be added to the media top-level menu.</p>
+							<p>Pages should be labeled accurately so users will know what they will find on each page without having to guess. Keep labels short and concise.</p>
+							<p>Add your settings to existing settings pages, if it makes sense, otherwise add it as a sub-menu to the settings top-level menu.</p>
+						</aside>
 					</section>
 					<section>
-						<h3>Creating a custom icons for your plugins or custom post types is highly encouraged.</h3>
+						<h2>Create custom icons</h2>
+						<aside class="notes">
+							<p>If you are adding a top-level menu, then it's highly recommended that you add a custom icon which stylistically blends in with the rest of the admin icons.</p>
+							<p>Your icon should, by default, be black and white, with color on hover.</p>
+						</aside>
 					</section>
 				</section>			
 											
@@ -343,7 +366,7 @@ function wcbos_validate( $input ) {
 				</section>
 				
 				<!-- Theme Options: UX -->
-				<section data-state="purple">
+				<section data-state="gold">
 					<section>
 						<h2>You probably don't need<br /> a "themes options" page.</h2>
 						<aside class="notes">
